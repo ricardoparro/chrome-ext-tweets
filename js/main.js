@@ -210,4 +210,5 @@ blockspring.runParsed("get-a-users-latest-tweets", { "username": "ricardoparro"}
 
   $('td.tweet').append(res.params["tweets"][0]["text"])
   console.log(res.params);
+
 })
