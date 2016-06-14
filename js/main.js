@@ -205,10 +205,16 @@
 }(jQuery)); 
 
 
+var $users = ['ricardoparro','caterinemanica'];
 
-blockspring.runParsed("get-a-users-latest-tweets", { "username": "ricardoparro"}, { "api_key": "br_34575_f86fc9cd1f79e30c5eb8685c830139bf624654ee" }, function(res){
+$.each($users, function(index, value){
+
+blockspring.runParsed("get-a-users-latest-tweets", { "username": value}, { "api_key": "br_34575_f86fc9cd1f79e30c5eb8685c830139bf624654ee" }, function(res){
 
   $('td.tweet').append(res.params["tweets"][0]["text"])
   console.log(res.params);
-
 })
+});
+
+
+
