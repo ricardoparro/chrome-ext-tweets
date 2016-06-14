@@ -211,7 +211,8 @@ $.each($users, function(index, value){
 
 blockspring.runParsed("get-a-users-latest-tweets", { "username": value}, { "api_key": "br_34575_f86fc9cd1f79e30c5eb8685c830139bf624654ee" }, function(res){
 
-  $('td.tweet').append(res.params["tweets"][0]["text"])
+  $('#tweetTable > tbody:last-child').append('<tr><td>'+ res.params["tweets"][0].user["screen_name"] +'</td><td>'+ res.params["tweets"][0]["text"] +'</td></tr>');
+
   console.log(res.params);
 })
 });
