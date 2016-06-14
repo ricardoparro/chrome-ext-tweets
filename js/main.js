@@ -1,4 +1,4 @@
- window.blockspring = (function($){
+window.blockspring = (function($){
   return blockspring = {
     getDataUri: function(file_param){
       if ("data" in file_param && "content-type" in file_param){
@@ -74,8 +74,8 @@
       var cache = ("cache" in options) ? options.cache : false;
       var expiry = ("expiry" in options && options.expiry != null ) ? ("&expiry=" + options["expiry"]) : ""
 
-      var blockspring_url = 'https://sender.blockspring.com'
-      var block = block.split("/").slice(-1)[0];
+        var blockspring_url = 'https://sender.blockspring.com'
+        var block = block.split("/").slice(-1)[0];
       var url = blockspring_url + "/api_v2/blocks/" + block + "?api_key=" + api_key + "&cache=" + cache + expiry;
 
       $.ajax({
@@ -174,8 +174,8 @@
       var cache = ("cache" in options) ? options.cache : false;
       var expiry = ("expiry" in options && options.expiry != null ) ? ("&expiry=" + options["expiry"]) : ""
 
-      var blockspring_url = 'https://sender.blockspring.com'
-      var block = block.split("/").slice(-1)[0];
+        var blockspring_url = 'https://sender.blockspring.com'
+        var block = block.split("/").slice(-1)[0];
       var url = blockspring_url + "/api_v2/blocks/" + block + "?api_key=" + api_key + "&cache=" + cache + expiry;
 
       $.ajax({
@@ -205,17 +205,24 @@
 }(jQuery)); 
 
 
-var $users = ['ricardoparro','caterinemanica'];
-
-$.each($users, function(index, value){
-
-blockspring.runParsed("get-a-users-latest-tweets", { "username": value}, { "api_key": "br_34575_f86fc9cd1f79e30c5eb8685c830139bf624654ee" }, function(res){
-
-  $('#tweetTable > tbody:last-child').append('<tr><td>'+ res.params["tweets"][0].user["screen_name"] +'</td><td>'+ res.params["tweets"][0]["text"] +'</td></tr>');
-
-  console.log(res.params);
-})
-});
+getTweets(function() {$('#loading').show();}, function() {alert('hide'); $('#loading').hide();});
 
 
+function getTweets(showLoading, hideLoading) {
+  showLoading();
+
+  var $users = ['ricardoparro','caterinemanica'];
+
+  $.each($users, function(index, value){
+
+    blockspring.runParsed("get-a-users-latest-tweets", { "username": value}, { "api_key": "br_34575_f86fc9cd1f79e30c5eb8685c830139bf624654ee" }, function(res){
+
+      $('#tweetTable > tbody:last-child').append('<tr><td>'+ res.params["tweets"][0].user["screen_name"] +'</td><td>'+ res.params["tweets"][0]["text"] +'</td></tr>');
+
+      console.log(res.params);
+    })
+  });
+
+  hideLoading();
+} 
 
